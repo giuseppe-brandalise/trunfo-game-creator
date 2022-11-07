@@ -12,7 +12,7 @@ class App extends React.Component {
     cardImage: '',
     cardRare: 'normal',
     cardTrunfo: false,
-    // hasTrunfo,
+    hasTrunfo: false,
     isSaveButtonDisabled: true,
     cards: [],
   };
@@ -28,7 +28,6 @@ class App extends React.Component {
         cardAttr3,
         cardImage,
         cardRare,
-        // hasTrunfo,
       } = this.state;
       const maxAttr = 90;
       const maxAll = 210;
@@ -65,6 +64,13 @@ class App extends React.Component {
       cardRare,
       cardTrunfo,
     } = this.state;
+
+    if (cardTrunfo === 'on') {
+      this.setState({
+        hasTrunfo: true,
+      });
+    }
+
     const obj = {
       Nome: cardName,
       Descrição: cardDescription,
@@ -75,6 +81,7 @@ class App extends React.Component {
       Raridade: cardRare,
       Trunfo: cardTrunfo,
     };
+
     this.setState((oldState) => ({
       cards: [...oldState.cards, obj],
       cardName: '',
@@ -98,7 +105,7 @@ class App extends React.Component {
       cardImage,
       cardRare,
       cardTrunfo,
-      // hasTrunfo,
+      hasTrunfo,
       isSaveButtonDisabled,
     } = this.state;
     return (
@@ -114,7 +121,7 @@ class App extends React.Component {
             cardImage={ cardImage }
             cardRare={ cardRare }
             cardTrunfo={ cardTrunfo }
-            // hasTrunfo,
+            hasTrunfo={ hasTrunfo }
             isSaveButtonDisabled={ isSaveButtonDisabled }
             onSaveButtonClick={ this.onSaveButtonClick }
             onInputChange={ this.onInputChange }
