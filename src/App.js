@@ -14,6 +14,7 @@ class App extends React.Component {
     cardTrunfo: false,
     // hasTrunfo,
     isSaveButtonDisabled: true,
+    cards: [],
   };
 
   onInputChange = (event) => {
@@ -74,7 +75,17 @@ class App extends React.Component {
       Raridade: cardRare,
       Trunfo: cardTrunfo,
     };
-    console.log(obj);
+    this.setState((oldState) => ({
+      cards: [...oldState.cards, obj],
+      cardName: '',
+      cardDescription: '',
+      cardAttr1: '0',
+      cardAttr2: '0',
+      cardAttr3: '0',
+      cardImage: '',
+      cardRare: 'normal',
+      cardTrunfo: false,
+    }));
   };
 
   render() {
