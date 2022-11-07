@@ -6,11 +6,11 @@ class App extends React.Component {
   state = {
     cardName: '',
     cardDescription: '',
-    cardAttr1: '',
-    cardAttr2: '',
-    cardAttr3: '',
+    cardAttr1: '0',
+    cardAttr2: '0',
+    cardAttr3: '0',
     cardImage: '',
-    cardRare: '',
+    cardRare: 'normal',
     cardTrunfo: false,
     // hasTrunfo,
     isSaveButtonDisabled: true,
@@ -18,24 +18,34 @@ class App extends React.Component {
 
   onInputChange = (event) => {
     const { target } = event;
-    const {
-      cardName,
-      cardDescription,
-      cardAttr1,
-      cardAttr2,
-      cardAttr3,
-      cardImage,
-      cardRare,
-      // hasTrunfo,
-    } = this.state;
     this.setState({ [target.name]: target.value }, () => {
-      const newButtonState = cardName.lenght < 1
-        || cardDescription.length < 1
-        || cardAttr1.lenght < 1
-        || cardAttr2.lenght < 1
-        || cardAttr3.lenght < 1
-        || cardImage.lenght < 1
-        || cardRare.lenght < 1;
+      const {
+        cardName,
+        cardDescription,
+        cardAttr1,
+        cardAttr2,
+        cardAttr3,
+        cardImage,
+        cardRare,
+        // hasTrunfo,
+      } = this.state;
+      const maxAttr = 90;
+      const maxAll = 210;
+      const allAttr = Number(cardAttr1) + Number(cardAttr2) + Number(cardAttr3);
+      const newButtonState = cardName.length < 1
+        || cardDescription === ''
+        || cardAttr1 === '0'
+        || cardAttr2 === '0'
+        || cardAttr3 === '0'
+        || cardImage === ''
+        || cardRare === ''
+        || Number(cardAttr1) < 0
+        || Number(cardAttr2) < 0
+        || Number(cardAttr3) < 0
+        || Number(cardAttr1) > maxAttr
+        || Number(cardAttr2) > maxAttr
+        || Number(cardAttr3) > maxAttr
+        || allAttr > maxAll;
       this.setState({
         isSaveButtonDisabled: newButtonState,
       });
